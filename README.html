@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Ultimate CLI Game Collection | Premium Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1b1986d2;
+            --secondary: #3564bb;
+            --dark: #0f0c29;
+            --light: #f8f9fa;
+            --accent: #fffb05;
+        }
+        body {
+            font-family: 'Times New Roman', monospace, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #24243e 100%);
+            color: var(--light);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(28, 70, 117, 0.2) 0%, rgba(136,211,206,0.2) 100%);
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.02)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"/></svg>');
+            background-size: 100% 100%;
+            z-index: -1;
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(110,69,226,0.3);
+        }
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin: 1rem 0 2rem;
+        }
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(5px);
+        }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        .game-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .game-title {
+            font-size: 2rem;
+            margin: 0;
+            color: white;
+        }
+        .game-screenshot {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .game-content {
+            padding: 2rem;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-item {
+            background: rgba(255,255,255,0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent);
+        }
+        .feature-item i {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        .code-block {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--primary);
+        }
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .control-item {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .key {
+            background: var(--dark);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Fira Code', monospace;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            color: var(--accent);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .game-screenshot {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Terminal Game Collection</h1>
+            <p class="tagline">Premium Edition - Three Masterpiece CLI Games</p>
+            <div class="badges">
+                <div class="badge"><i class="fas fa-terminal"></i> CLI Experience</div>
+                <div class="badge"><i class="fas fa-gamepad"></i> Python Powered</div>
+                <div class="badge"><i class="fas fa-star"></i> Open Source</div>
+            </div>
+        </header>
+
+        <!-- Dungeon Game -->
+        <div class="game-card">
+            <div class="game-header">
+                <h2 class="game-title"><i class="fas fa-dungeon"></i> The Ultimate Dungeon Escape</h2>
+                <div class="badge">RPG Adventure</div>
+            </div>
+            <img src="Dungeon.png" alt="Dungeon Escape Screenshot" class="game-screenshot">
+            <div class="game-content">
+                <p>Embark on an epic text-based dungeon crawler with rich animations, turn-based combat, and multiple room types. Battle fearsome enemies, solve puzzles, and escape with your life!</p>
+                
+                <h3><i class="fas fa-gem"></i> Premium Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-palette"></i>
+                        <strong>Rich Text Animations</strong> - Beautifully animated text with color effects
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-swords"></i>
+                        <strong>Turn-Based Combat</strong> - Strategic battles with attack/defend/item options
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <strong>Puzzle Rooms</strong> - Solve riddles to progress
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-treasure-chest"></i>
+                        <strong>Loot System</strong> - Collect gold and items
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-skull"></i>
+                        <strong>Boss Battles</strong> - Epic final encounter
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-random"></i>
+                        <strong>Random Events</strong> - Unique encounters every playthrough
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-download"></i> Installation</h3>
+                <div class="code-block">
+                    pip install rich<br>
+                    python Dungeon.py
+                </div>
+
+                <h3><i class="fas fa-keyboard"></i> Controls</h3>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <span class="key">attack</span>
+                        <span>Basic attack</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">defend</span>
+                        <span>Reduce damage</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">item</span>
+                        <span>Use inventory</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">left/right</span>
+                        <span>Navigate dungeon</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">inventory</span>
+                        <span>Check items</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Neon Racer -->
+        <div class="game-card">
+            <div class="game-header">
+                <h2 class="game-title"><i class="fas fa-car"></i> Neon Racer</h2>
+                <div class="badge">Arcade Racing</div>
+            </div>
+            <img src="NeonRacer.png" alt="Neon Racer Screenshot" class="game-screenshot">
+            <div class="game-content">
+                <p>A high-speed terminal racing game with neon aesthetics, power-ups, and progressive difficulty. Dodge obstacles, collect power-ups, and set new high scores!</p>
+                
+                <h3><i class="fas fa-gem"></i> Premium Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <strong>Progressive Difficulty</strong> - Game speeds up as you score
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <strong>Power-Ups</strong> - Collect shields for protection
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-random"></i>
+                        <strong>Random Generation</strong> - Unique tracks every game
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-star"></i>
+                        <strong>Combo System</strong> - Chain actions for higher scores
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-palette"></i>
+                        <strong>Neon Aesthetics</strong> - Colorful terminal UI
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-trophy"></i>
+                        <strong>Score Tracking</strong> - Beat your high score
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-download"></i> Installation</h3>
+                <div class="code-block">
+                    python NeonRacer.py
+                </div>
+
+                <h3><i class="fas fa-keyboard"></i> Controls</h3>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <span class="key">↑</span>
+                        <span>Move Up</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↓</span>
+                        <span>Move Down</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">←</span>
+                        <span>Move Left</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">→</span>
+                        <span>Move Right</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">Q</span>
+                        <span>Quit Game</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TermiQuest -->
+        <div class="game-card">
+            <div class="game-header">
+                <h2 class="game-title"><i class="fas fa-dragon"></i> TermiQuest</h2>
+                <div class="badge">Roguelike Adventure</div>
+            </div>
+            <img src="TermiQuest.png" alt="TermiQuest Screenshot" class="game-screenshot">
+            <div class="game-content">
+                <p>A roguelike dungeon exploration game with random maps, turn-based combat, and treasure collection. Explore, battle enemies, and find the exit to escape!</p>
+                
+                <h3><i class="fas fa-gem"></i> Premium Features</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-map"></i>
+                        <strong>Procedural Generation</strong> - Unique dungeons every game
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-swords"></i>
+                        <strong>Turn-Based Combat</strong> - Strategic enemy encounters
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-treasure-chest"></i>
+                        <strong>Treasure System</strong> - Collect gold and items
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-robot"></i>
+                        <strong>Enemy AI</strong> - Wandering dungeon creatures
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-heart"></i>
+                        <strong>Health System</strong> - Manage your survival
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-door-open"></i>
+                        <strong>Exit Objective</strong> - Find the way out to win
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-download"></i> Installation</h3>
+                <div class="code-block">
+                    python TermiQuest.py
+                </div>
+
+                <h3><i class="fas fa-keyboard"></i> Controls</h3>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <span class="key">↑</span>
+                        <span>Move Up</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↓</span>
+                        <span>Move Down</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">←</span>
+                        <span>Move Left</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">→</span>
+                        <span>Move Right</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">Q</span>
+                        <span>Quit Game</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>© 2025 CLI Game Collection | Premium Edition</p>
+            <p>Created by Nibir with Python</p>
+        </div>
+    </div>
+</body>
+</html>
